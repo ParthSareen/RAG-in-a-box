@@ -124,7 +124,7 @@ mpmath==1.3.0
     # via sympy
 networkx==3.3
     # via torch
-numpy==2.1.1
+numpy==1.26.4
     # via chroma-hnswlib
     # via chromadb
     # via onnxruntime
@@ -268,7 +268,7 @@ starlette==0.38.6
 sympy==1.13.3
     # via onnxruntime
     # via torch
-tenacity==9.0.0
+tenacity==8.5.0
     # via chromadb
 threadpoolctl==3.5.0
     # via scikit-learn
