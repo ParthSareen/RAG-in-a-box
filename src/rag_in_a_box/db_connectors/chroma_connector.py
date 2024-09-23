@@ -9,7 +9,7 @@ class ChromaConnector:
         self.client = chromadb.PersistentClient(path=persist_path)
         self.embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 
-    def load_documents(self, collection_name: str, documents: List[Dict[str, str]]) -> None:
+    def add_documents(self, collection_name: str, documents: List[Dict[str, str]]) -> None:
         try:
             collection = self.client.get_or_create_collection(
                 name=collection_name,
@@ -25,6 +25,9 @@ class ChromaConnector:
                 contents.append(doc['content'])
                 metadatas.append({"source": doc['doc_name']})
 
+            print(documents)
+            print(ids)
+            input("Press Enter to continue...")
             collection.add(
                 ids=ids,
                 documents=contents,
@@ -62,7 +65,7 @@ if __name__ == "__main__":
         ]
         
         print("Loading documents...")
-        connector.load_documents(collection_name, test_documents)
+        connector.add_documents(collection_name, test_documents)
         print("Documents loaded successfully.")
 
     # Test searching
