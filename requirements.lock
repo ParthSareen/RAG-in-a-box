@@ -9,9 +9,12 @@
 #   generate-hashes: false
 
 -e file:.
+aiofiles==23.2.1
+    # via gradio
 annotated-types==0.7.0
     # via pydantic
 anyio==4.6.0
+    # via gradio
     # via httpx
     # via openai
     # via starlette
@@ -42,6 +45,10 @@ click==8.1.7
     # via uvicorn
 coloredlogs==15.0.1
     # via onnxruntime
+contourpy==1.3.0
+    # via matplotlib
+cycler==0.12.1
+    # via matplotlib
 deprecated==1.2.14
     # via opentelemetry-api
     # via opentelemetry-exporter-otlp-proto-grpc
@@ -52,19 +59,29 @@ durationpy==0.7
     # via kubernetes
 fastapi==0.115.0
     # via chromadb
+    # via gradio
+ffmpy==0.4.0
+    # via gradio
 filelock==3.16.1
     # via huggingface-hub
     # via torch
     # via transformers
 flatbuffers==24.3.25
     # via onnxruntime
+fonttools==4.54.0
+    # via matplotlib
 fsspec==2024.9.0
+    # via gradio-client
     # via huggingface-hub
     # via torch
 google-auth==2.35.0
     # via kubernetes
 googleapis-common-protos==1.65.0
     # via opentelemetry-exporter-otlp-proto-grpc
+gradio==4.44.0
+    # via rag-in-a-box
+gradio-client==1.3.0
+    # via gradio
 grpcio==1.66.1
     # via chromadb
     # via opentelemetry-exporter-otlp-proto-grpc
@@ -77,9 +94,13 @@ httptools==0.6.1
     # via uvicorn
 httpx==0.27.2
     # via chromadb
+    # via gradio
+    # via gradio-client
     # via ollama
     # via openai
 huggingface-hub==0.25.1
+    # via gradio
+    # via gradio-client
     # via sentence-transformers
     # via tokenizers
     # via transformers
@@ -93,20 +114,25 @@ importlib-metadata==8.4.0
     # via opentelemetry-api
 importlib-resources==6.4.5
     # via chromadb
+    # via gradio
 jinja2==3.1.4
+    # via gradio
     # via torch
 jiter==0.5.0
     # via openai
 joblib==1.4.2
     # via scikit-learn
+kiwisolver==1.4.7
+    # via matplotlib
 kubernetes==31.0.0
     # via chromadb
 markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
+    # via gradio
     # via jinja2
-marqo==3.8.1
-    # via rag-in-a-box
+matplotlib==3.9.2
+    # via gradio
 mdurl==0.1.2
     # via markdown-it-py
 mmh3==5.0.1
@@ -120,7 +146,11 @@ networkx==3.3
 numpy==1.26.4
     # via chroma-hnswlib
     # via chromadb
+    # via contourpy
+    # via gradio
+    # via matplotlib
     # via onnxruntime
+    # via pandas
     # via scikit-learn
     # via scipy
     # via transformers
@@ -167,15 +197,22 @@ opentelemetry-util-http==0.48b0
     # via opentelemetry-instrumentation-fastapi
 orjson==3.10.7
     # via chromadb
+    # via gradio
 overrides==7.7.0
     # via chromadb
 packaging==24.1
     # via build
+    # via gradio
+    # via gradio-client
     # via huggingface-hub
-    # via marqo
+    # via matplotlib
     # via onnxruntime
     # via transformers
+pandas==2.2.3
+    # via gradio
 pillow==10.4.0
+    # via gradio
+    # via matplotlib
     # via sentence-transformers
 posthog==3.6.6
     # via chromadb
@@ -191,12 +228,16 @@ pyasn1-modules==0.4.1
 pydantic==2.9.2
     # via chromadb
     # via fastapi
-    # via marqo
+    # via gradio
     # via openai
 pydantic-core==2.23.4
     # via pydantic
+pydub==0.25.1
+    # via gradio
 pygments==2.18.0
     # via rich
+pyparsing==3.1.4
+    # via matplotlib
 pypdf==5.0.0
     # via rag-in-a-box
 pypdf2==3.0.1
@@ -207,11 +248,18 @@ pyproject-hooks==1.1.0
     # via build
 python-dateutil==2.9.0.post0
     # via kubernetes
+    # via matplotlib
+    # via pandas
     # via posthog
 python-dotenv==1.0.1
     # via uvicorn
+python-multipart==0.0.10
+    # via gradio
+pytz==2024.2
+    # via pandas
 pyyaml==6.0.2
     # via chromadb
+    # via gradio
     # via huggingface-hub
     # via kubernetes
     # via transformers
@@ -221,7 +269,6 @@ regex==2024.9.11
 requests==2.32.3
     # via huggingface-hub
     # via kubernetes
-    # via marqo
     # via posthog
     # via requests-oauthlib
     # via transformers
@@ -232,6 +279,8 @@ rich==13.8.1
     # via typer
 rsa==4.9
     # via google-auth
+ruff==0.6.7
+    # via gradio
 safetensors==0.4.5
     # via transformers
 scikit-learn==1.5.2
@@ -239,6 +288,8 @@ scikit-learn==1.5.2
 scipy==1.14.1
     # via scikit-learn
     # via sentence-transformers
+semantic-version==2.10.0
+    # via gradio
 sentence-transformers==3.1.1
     # via rag-in-a-box
 setuptools==75.1.0
@@ -266,6 +317,8 @@ threadpoolctl==3.5.0
 tokenizers==0.19.1
     # via chromadb
     # via transformers
+tomlkit==0.12.0
+    # via gradio
 torch==2.4.1
     # via sentence-transformers
 tqdm==4.66.5
@@ -278,30 +331,36 @@ transformers==4.44.2
     # via sentence-transformers
 typer==0.12.5
     # via chromadb
+    # via gradio
 typing-extensions==4.12.2
     # via chromadb
     # via fastapi
+    # via gradio
+    # via gradio-client
     # via huggingface-hub
-    # via marqo
     # via openai
     # via opentelemetry-sdk
     # via pydantic
     # via pydantic-core
     # via torch
     # via typer
-urllib3==1.26.20
+tzdata==2024.2
+    # via pandas
+urllib3==2.2.3
+    # via gradio
     # via kubernetes
-    # via marqo
     # via requests
 uvicorn==0.30.6
     # via chromadb
+    # via gradio
 uvloop==0.20.0
     # via uvicorn
 watchfiles==0.24.0
     # via uvicorn
 websocket-client==1.8.0
     # via kubernetes
-websockets==13.1
+websockets==12.0
+    # via gradio-client
     # via uvicorn
 wrapt==1.16.0
     # via deprecated

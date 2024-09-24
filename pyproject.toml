@@ -11,8 +11,8 @@ dependencies = [
     "pypdf2>=3.0.1",
     "pypdf>=5.0.0",
     "chromadb>=0.5.7",
-    "marqo>=3.8.1",
     "sentence-transformers>=3.1.1",
+    "gradio>=4.44.0",
 ]
 readme = "README.md"
 requires-python = ">= 3.10"

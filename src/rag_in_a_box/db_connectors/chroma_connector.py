@@ -20,14 +20,13 @@ class ChromaConnector:
             contents = []
             metadatas = []
 
+            print(f"Adding {len(documents)} documents to Chroma collection '{collection_name}'...")
+
             for doc in documents:
                 ids.append(str(uuid.uuid4()))
                 contents.append(doc['content'])
                 metadatas.append({"source": doc['doc_name']})
 
-            print(documents)
-            print(ids)
-            input("Press Enter to continue...")
             collection.add(
                 ids=ids,
                 documents=contents,
@@ -46,6 +45,14 @@ class ChromaConnector:
             return results
         except Exception as e:
             raise RuntimeError(f"Failed to search documents: {str(e)}")
+
+
+    def delete_collection(self, collection_name: str) -> None:
+        try:
+            self.client.delete_collection(name=collection_name)
+            print(f"Collection '{collection_name}' has been deleted successfully.")
+        except Exception as e:
+            raise RuntimeError(f"Failed to delete collection '{collection_name}': {str(e)}")
 
 
 if __name__ == "__main__":
