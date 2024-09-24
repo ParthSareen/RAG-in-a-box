@@ -50,7 +50,6 @@ def launch_interface():
         chatbot = gr.ChatInterface(
             process_query,
             additional_inputs=[loader_type, path, persist_path, model],
-            title="RAG Chatbot",
             description="Ask questions about your documents",
             cache_examples=False,
         )
