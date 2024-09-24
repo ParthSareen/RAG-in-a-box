@@ -2,12 +2,12 @@ import argparse
 from pathlib import Path
 from typing import List, Dict
 
+from llm_connectors import get_llm_response_openai, get_llm_response_ollama
 from loaders.pdf_loader import PdfLoader
 from loaders.markdown_loader import MarkdownLoader
 from db_connectors.chroma_connector import ChromaConnector
 from db_connectors.marqo_connector import MarqoConnector
 
-import openai
 
 def load_documents(loader_type: str, directory_path: str) -> List[Dict[str, str]]:
     if loader_type == 'pdf':
@@ -36,17 +36,7 @@ def search_documents(connector, query: str, connector_type: str):
     elif connector_type == 'marqo':
         return connector.search("default_index", query)
 
-def get_llm_response(query: str, context: str, model: str):
-    messages = [
-        {"role": "system", "content": "You are a helpful assistant. Use the provided context to answer the user's question."},
-        {"role": "user", "content": f"Context: {context}\n\nQuestion: {query}"}
-    ]
-    response = openai.chat.completions.create(
-        model=model,
-        messages=messages,
-        stream=True
-    )
-    return response
+
 
 def main():
     parser = argparse.ArgumentParser(description="Document loader and Q&A system")
@@ -95,11 +85,17 @@ def main():
             context = "\n".join([hit['content'] for hit in results['hits']])
 
         # Get response from LLM
-        response = get_llm_response(query, context, args.model)
-        print("Answer:", end=" ", flush=True)
-        for chunk in response:
-            if chunk.choices[0].delta.content is not None:
-                print(chunk.choices[0].delta.content, end="", flush=True)
+        if args.model.startswith('gpt'):
+            response = get_llm_response_openai(query, context, args.model)
+            print("Answer:", end=" ", flush=True)
+            for chunk in response:
+                if chunk.choices[0].delta.content is not None:
+                    print(chunk.choices[0].delta.content, end="", flush=True)
+        else:
+            response = get_llm_response_ollama(query, context, args.model)
+            print("Answer:", end=" ", flush=True)
+            for chunk in response:
+                print(chunk['message']['content'], end='', flush=True)
         print()
 
 if __name__ == "__main__":
