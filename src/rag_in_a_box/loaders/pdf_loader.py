@@ -1,7 +1,7 @@
 from typing import List, Dict
 from pathlib import Path
 from pypdf import PdfReader
-from icecream import ic
+# from icecream import ic
 
 class PdfLoader:
     def __init__(self, directory_path: str):
